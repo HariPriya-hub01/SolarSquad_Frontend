@@ -15,6 +15,7 @@ import ZoneManagement from './pages/ZoneManagement';
 import Settings from './pages/Settings';
 
 export default function App() {
+  // Deploy trigger comment to force Vercel webhook build
   const [activeTab, setActiveTab] = useState('dashboard');
 
   useEffect(() => {
