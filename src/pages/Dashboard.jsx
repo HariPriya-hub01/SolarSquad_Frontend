@@ -33,6 +33,7 @@ import {
   CartesianGrid 
 } from 'recharts';
 import { KPI_STATS, ZONES, ALERTS, ANALYTICS_DATA } from '../data/mockData';
+import { API_BASE_URL } from '../config';
 
 export default function Dashboard() {
   const [kpis, setKpis] = useState(KPI_STATS);
@@ -213,7 +214,7 @@ export default function Dashboard() {
               
               {/* Live Streaming Video Frame */}
               <img 
-                src={`http://localhost:8000/api/cameras/${activeCameraId}/stream`}
+                src={`${API_BASE_URL}/api/cameras/${activeCameraId}/stream`}
                 alt="Live AI Camera Feed"
                 className="w-full h-full object-cover"
                 onError={(e) => {

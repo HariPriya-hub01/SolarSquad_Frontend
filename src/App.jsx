@@ -13,6 +13,7 @@ import Reports from './pages/Reports';
 import CameraManagement from './pages/CameraManagement';
 import ZoneManagement from './pages/ZoneManagement';
 import Settings from './pages/Settings';
+import { API_BASE_URL } from './config';
 
 export default function App() {
   // Deploy trigger comment to force Vercel webhook build
@@ -20,7 +21,7 @@ export default function App() {
 
   useEffect(() => {
     // Send a sample SMS notification on initial page mount (reload)
-    fetch('http://localhost:8000/api/test-sms', {
+    fetch(`${API_BASE_URL}/api/test-sms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

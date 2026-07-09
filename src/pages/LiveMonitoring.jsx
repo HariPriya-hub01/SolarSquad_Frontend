@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Camera, Activity, ShieldCheck, ShieldAlert, RefreshCw, Maximize2, Cpu, Eye, Radio, Sparkles } from 'lucide-react';
 import { CAMERA_FEEDS } from '../data/mockData';
+import { API_BASE_URL } from '../config';
 
 export default function LiveMonitoring() {
   const [cameras, setCameras] = useState(CAMERA_FEEDS.filter(c => c.id !== 'CAM-05'));
@@ -87,7 +88,7 @@ export default function LiveMonitoring() {
                 <div className="relative aspect-video bg-slate-950 border border-slate-850 rounded-xl overflow-hidden group shadow-inner">
                   {/* Real-time backend MJPEG video feed */}
                   <img 
-                    src={`http://localhost:8000/api/cameras/${cam.id}/stream`} 
+                    src={`${API_BASE_URL}/api/cameras/${cam.id}/stream`} 
                     className="w-full h-full object-cover" 
                     alt={cam.name} 
                   />
