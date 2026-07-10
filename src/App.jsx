@@ -18,6 +18,7 @@ import { API_BASE_URL } from './config';
 export default function App() {
   // Deploy trigger comment to force Vercel webhook build
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     // Send a sample SMS notification on initial page mount (reload)
@@ -56,14 +57,14 @@ export default function App() {
   };
 
   return (
-    <div className="flex bg-[#0b1120] min-h-screen text-slate-100 font-sans w-full">
+    <div className="flex bg-brand-bg min-h-screen text-slate-800 font-sans w-full overflow-x-hidden">
       {/* Sidebar Navigation */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        <TopNavbar />
-        <main className="flex-1 p-6 overflow-y-auto w-full mx-auto">
+        <TopNavbar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+        <main className="flex-1 p-4 sm:p-6 overflow-y-auto w-full mx-auto">
           {renderActivePage()}
         </main>
       </div>

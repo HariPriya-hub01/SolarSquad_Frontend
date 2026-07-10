@@ -137,7 +137,7 @@ export const CAMERA_FEEDS = [
     status: 'Active',
     confidence: 98,
     connectionStatus: 'Excellent',
-    detectedCount: 2,
+    detectedCount: 8,
     lastActive: 'Online',
     workerDetails: [
       { id: 'WRK-105', role: 'Assembler', ppe: { helmet: true, vest: true, gloves: true, shoes: true, faceShield: false }, risk: 'Safe' },
@@ -153,7 +153,7 @@ export const CAMERA_FEEDS = [
     status: 'Active',
     confidence: 94,
     connectionStatus: 'Good',
-    detectedCount: 10,
+    detectedCount: 9,
     lastActive: 'Online',
     workerDetails: [
       { id: 'WRK-084', role: 'Welder', ppe: { helmet: true, vest: true, gloves: false, shoes: true, faceShield: true }, risk: 'Critical' }
@@ -183,7 +183,7 @@ export const CAMERA_FEEDS = [
     status: 'Active',
     confidence: 99,
     connectionStatus: 'Excellent',
-    detectedCount: 16,
+    detectedCount: 11,
     lastActive: 'Online',
     workerDetails: [
       { id: 'WRK-203', role: 'Forklift Operator', ppe: { helmet: true, vest: false, gloves: true, shoes: true, faceShield: false }, risk: 'Warning' }

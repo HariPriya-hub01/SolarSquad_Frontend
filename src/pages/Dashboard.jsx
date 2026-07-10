@@ -59,10 +59,10 @@ export default function Dashboard() {
   // Helper for KPI styling
   const getKpiColor = (type) => {
     switch (type) {
-      case 'safe': return 'text-emerald-400 border-emerald-500/10 bg-emerald-500/5';
-      case 'warning': return 'text-amber-400 border-amber-500/10 bg-amber-500/5';
-      case 'critical': return 'text-red-400 border-red-500/10 bg-red-500/5';
-      default: return 'text-blue-400 border-blue-500/10 bg-blue-505/5';
+      case 'safe': return 'text-emerald-600 border border-emerald-200 bg-emerald-50';
+      case 'warning': return 'text-amber-600 border border-amber-200 bg-amber-50';
+      case 'critical': return 'text-red-600 border border-red-200 bg-red-50';
+      default: return 'text-blue-600 border border-blue-200 bg-blue-50';
     }
   };
 
@@ -82,13 +82,13 @@ export default function Dashboard() {
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">EHS Safety Intelligence</h1>
-          <p className="text-sm text-slate-400">Automated computer vision compliance monitoring for Detroit Assembly Plant #4.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-800">EHS Safety Intelligence</h1>
+          <p className="text-sm text-slate-500 font-light">Automated computer vision compliance monitoring for Detroit Assembly Plant #4.</p>
         </div>
         <div className="flex items-center gap-2">
           <button 
             onClick={() => setRefreshCount(r => r + 1)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs font-semibold text-slate-350 hover:bg-slate-800 transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition-colors shadow-sm"
           >
             <RefreshCw className="h-3.5 w-3.5" />
             Refresh Telemetry
@@ -105,25 +105,25 @@ export default function Dashboard() {
           return (
             <div 
               key={kpi.id} 
-              className={`p-4 rounded-2xl border bg-slate-900/60 border-slate-850 hover:border-slate-800 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.15)] flex flex-col justify-between`}
+              className={`p-4 rounded-2xl border bg-white border-slate-200 hover:border-slate-350 hover:shadow-md transition-all shadow-sm flex flex-col justify-between`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider h-8 block whitespace-normal break-words pr-2">{kpi.label}</span>
+                <span className="text-[10px] uppercase font-bold text-slate-450 tracking-wider h-8 block whitespace-normal break-words pr-2">{kpi.label}</span>
                 <div className={`p-1.5 rounded-lg ${kpiColor} shrink-0`}>
                   <Icon className="h-4 w-4" />
                 </div>
               </div>
               <div>
-                <span className="text-2xl font-mono font-bold text-slate-100">
+                <span className="text-2xl font-mono font-bold text-slate-800">
                   {kpi.id === 'compliance' ? `${kpi.value}%` : kpi.value}
                 </span>
                 <div className="flex items-center gap-1.5 mt-1.5">
                   <span className={`text-[10px] font-bold ${
-                    kpi.change.startsWith('+') ? 'text-emerald-400' : kpi.change.startsWith('-') ? 'text-red-400' : 'text-slate-400'
+                    kpi.change.startsWith('+') ? 'text-emerald-600' : kpi.change.startsWith('-') ? 'text-red-600' : 'text-slate-400'
                   }`}>
                     {kpi.change}
                   </span>
-                  <span className="text-[9px] text-slate-500 uppercase tracking-widest font-semibold">vs last shift</span>
+                  <span className="text-[9px] text-slate-400 uppercase tracking-widest font-semibold">vs last shift</span>
                 </div>
               </div>
             </div>
@@ -135,18 +135,18 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         
         {/* Factory Zone Status List */}
-        <div className="xl:col-span-1 bg-[#111827] border border-slate-850 rounded-2xl p-5 flex flex-col justify-between shadow-xl">
+        <div className="xl:col-span-1 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
           <div>
-            <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-850">
-              <h2 className="text-sm font-bold text-slate-200 uppercase tracking-wider">Factory Zone Status</h2>
-              <span className="text-[10px] text-slate-500 font-mono">5 zones monitored</span>
+            <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+              <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider">Factory Zone Status</h2>
+              <span className="text-[10px] text-slate-400 font-mono">5 zones monitored</span>
             </div>
             <div className="space-y-3">
               {ZONES.map((zone) => {
                 const isSelected = selectedZone === zone.id;
-                let statusColor = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
-                if (zone.status === 'Warning') statusColor = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
-                if (zone.status === 'Critical') statusColor = 'bg-red-500/10 text-red-400 border-red-500/20';
+                let statusColor = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                if (zone.status === 'Warning') statusColor = 'bg-amber-50 text-amber-700 border-amber-200';
+                if (zone.status === 'Critical') statusColor = 'bg-red-50 text-red-700 border-red-200';
 
                 return (
                   <div
@@ -154,32 +154,32 @@ export default function Dashboard() {
                     onClick={() => setSelectedZone(zone.id)}
                     className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
                       isSelected 
-                        ? 'bg-slate-900 border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.1)]' 
-                        : 'bg-slate-950/40 border-slate-850 hover:bg-slate-950/80 hover:border-slate-800'
+                        ? 'bg-blue-50/50 border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.05)]' 
+                        : 'bg-slate-50/40 border-slate-200 hover:bg-slate-50 hover:border-slate-300'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-semibold text-slate-200">{zone.name}</span>
+                      <span className="text-sm font-semibold text-slate-800">{zone.name}</span>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${statusColor}`}>
                         {zone.status}
                       </span>
                     </div>
                     <div className="grid grid-cols-3 gap-2 text-center pt-1">
                       <div>
-                        <span className="text-[9px] text-slate-500 uppercase block font-semibold">Risk Level</span>
+                        <span className="text-[9px] text-slate-400 uppercase block font-semibold">Risk Level</span>
                         <span className={`text-xs font-mono font-bold uppercase ${
-                          zone.riskLevel === 'High' ? 'text-red-400' : zone.riskLevel === 'Medium' ? 'text-amber-400' : 'text-emerald-400'
+                          zone.riskLevel === 'High' ? 'text-red-600' : zone.riskLevel === 'Medium' ? 'text-amber-600' : 'text-emerald-600'
                         }`}>
                           {zone.riskLevel}
                         </span>
                       </div>
                       <div>
-                        <span className="text-[9px] text-slate-500 uppercase block font-semibold">Workers</span>
-                        <span className="text-xs font-mono font-bold text-slate-200">{zone.currentWorkers}</span>
+                        <span className="text-[9px] text-slate-400 uppercase block font-semibold">Workers</span>
+                        <span className="text-xs font-mono font-bold text-slate-800">{zone.currentWorkers}</span>
                       </div>
                       <div>
-                        <span className="text-[9px] text-slate-500 uppercase block font-semibold">Compliance</span>
-                        <span className="text-xs font-mono font-bold text-slate-200">{zone.complianceRate}%</span>
+                        <span className="text-[9px] text-slate-400 uppercase block font-semibold">Compliance</span>
+                        <span className="text-xs font-mono font-bold text-slate-800">{zone.complianceRate}%</span>
                       </div>
                     </div>
                   </div>
@@ -187,8 +187,8 @@ export default function Dashboard() {
               })}
             </div>
           </div>
-          <div className="mt-5 pt-3 border-t border-slate-850 flex items-center justify-between text-xs text-slate-500">
-            <span>AI Status: <strong className="text-emerald-400 font-mono">Active (99.2% Uptime)</strong></span>
+          <div className="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-400">
+            <span>AI Status: <strong className="text-emerald-600 font-mono font-bold">Active (99.2% Uptime)</strong></span>
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -197,20 +197,20 @@ export default function Dashboard() {
         </div>
 
         {/* Live AI Camera Feed */}
-        <div className="xl:col-span-2 bg-[#111827] border border-slate-850 rounded-2xl p-5 shadow-xl flex flex-col justify-between">
+        <div className="xl:col-span-2 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-850">
+            <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
               <div className="flex items-center gap-2">
                 <Activity className="h-4 w-4 text-red-500 animate-pulse" />
-                <h2 className="text-sm font-bold text-slate-200 uppercase tracking-wider">Live AI Camera Feed</h2>
+                <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider">Live AI Camera Feed</h2>
               </div>
-              <span className="text-xs font-mono text-slate-500">
+              <span className="text-xs font-mono text-slate-400">
                 {activeZone.name} | {activeCameraId} | {simulatedFeedTime.toISOString().substring(11,19)}
               </span>
             </div>
             
             {/* Camera Viewport Real-time Render */}
-            <div className="relative aspect-video rounded-xl bg-slate-950 border border-slate-850 overflow-hidden group shadow-inner flex items-center justify-center">
+            <div className="relative aspect-video rounded-xl bg-slate-100 border border-slate-200 overflow-hidden group shadow-inner flex items-center justify-center">
               
               {/* Live Streaming Video Frame */}
               <img 
@@ -229,57 +229,57 @@ export default function Dashboard() {
               <div className="absolute inset-0 border border-dashed border-slate-800/20 grid grid-cols-4 grid-rows-4 pointer-events-none"></div>
 
               {/* Status bar at the bottom */}
-              <div className="absolute bottom-4 left-4 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800 text-xs flex items-center gap-3">
+              <div className="absolute bottom-4 left-4 bg-white/90 px-3 py-1.5 rounded-lg border border-slate-200 text-xs flex items-center gap-3 shadow-sm">
                 <span className="flex h-2 w-2 relative">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </span>
-                <span className="text-slate-300 font-bold font-mono uppercase tracking-wider">LIVE FEED</span>
-                <span className="text-slate-500">|</span>
-                <span className="text-slate-400 font-mono">FPS: 15.0</span>
-                <span className="text-slate-500">|</span>
-                <span className="text-slate-400 font-mono">Stream Quality: 480p @ AI Edge</span>
+                <span className="text-slate-700 font-bold font-mono uppercase tracking-wider">LIVE FEED</span>
+                <span className="text-slate-300">|</span>
+                <span className="text-slate-600 font-mono">FPS: 15.0</span>
+                <span className="text-slate-300">|</span>
+                <span className="text-slate-600 font-mono">Stream Quality: 480p @ AI Edge</span>
               </div>
             </div>
 
             {/* AI Diagnostics Panel */}
             <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-3 bg-slate-950/40 border border-slate-850 rounded-xl">
-                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-1">Detected PPE Status</span>
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Detected PPE Status</span>
                 {selectedZone === 'welding' ? (
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Welding Helmet</span> <span className="text-emerald-400 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Welding Shield</span> <span className="text-emerald-400 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Fire-Resistant Vest</span> <span className="text-emerald-400 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Leather Gloves</span> <span className="text-red-400 flex items-center gap-1 font-semibold"><XCircle className="h-3 w-3" /> NO</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Welding Helmet</span> <span className="text-emerald-600 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Welding Shield</span> <span className="text-emerald-600 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Fire-Resistant Vest</span> <span className="text-emerald-600 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Leather Gloves</span> <span className="text-red-600 flex items-center gap-1 font-semibold"><XCircle className="h-3 w-3" /> NO</span></div>
                   </div>
                 ) : selectedZone === 'paint' ? (
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Safety Helmet</span> <span className="text-emerald-400 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Respirator Mask</span> <span className="text-amber-400 flex items-center gap-1 font-semibold"><AlertTriangle className="h-3 w-3" /> LOOSE</span></div>
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Chemical Gloves</span> <span className="text-emerald-400 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Safety Helmet</span> <span className="text-emerald-600 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Respirator Mask</span> <span className="text-amber-600 flex items-center gap-1 font-semibold"><AlertTriangle className="h-3 w-3" /> LOOSE</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Chemical Gloves</span> <span className="text-emerald-600 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
                   </div>
                 ) : (
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Safety Helmet</span> <span className="text-emerald-400 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Safety Vest</span> <span className="text-emerald-400 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
-                    <div className="flex items-center justify-between text-xs"><span className="text-slate-350">Steel Toe Shoes</span> <span className="text-emerald-400 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Safety Helmet</span> <span className="text-emerald-600 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Safety Vest</span> <span className="text-emerald-600 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
+                    <div className="flex items-center justify-between text-xs"><span className="text-slate-600 font-medium">Steel Toe Shoes</span> <span className="text-emerald-600 flex items-center gap-1 font-semibold"><CheckCircle className="h-3 w-3" /> YES</span></div>
                   </div>
                 )}
               </div>
-              <div className="p-3 bg-slate-950/40 border border-slate-850 rounded-xl">
-                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-1">AI Inference Stats</span>
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">AI Inference Stats</span>
                 <div className="space-y-1 text-xs">
-                  <div className="flex justify-between"><span className="text-slate-400">FPS / Latency:</span> <span className="font-mono text-slate-205">28.5 FPS / 12ms</span></div>
-                  <div className="flex justify-between"><span className="text-slate-400">CV Model Type:</span> <span className="font-mono text-slate-205">YOLO-v9-Safety</span></div>
-                  <div className="flex justify-between"><span className="text-slate-400">Edge Node:</span> <span className="font-mono text-slate-205">EDGE-WELD-02</span></div>
-                  <div className="flex justify-between"><span className="text-slate-400">Confidence Threshold:</span> <span className="font-mono text-slate-205">85%</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">FPS / Latency:</span> <span className="font-mono text-slate-800 font-semibold">28.5 FPS / 12ms</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">CV Model Type:</span> <span className="font-mono text-slate-800 font-semibold">YOLO-v9-Safety</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Edge Node:</span> <span className="font-mono text-slate-800 font-semibold">EDGE-WELD-02</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Confidence Threshold:</span> <span className="font-mono text-slate-800 font-semibold">85%</span></div>
                 </div>
               </div>
-              <div className="p-3 bg-slate-950/40 border border-slate-850 rounded-xl flex flex-col justify-between">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col justify-between">
                 <div>
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-1">AI Explanation</span>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">AI Explanation</span>
+                  <p className="text-[11px] text-slate-600 leading-relaxed font-light">
                     {selectedZone === 'welding' 
                       ? 'Worker WRK-084 entered Welding Area Station 4 and activated manual welding arc without leather welding gloves detected.'
                       : selectedZone === 'paint' 
@@ -299,48 +299,48 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Safety Analytics Panel */}
-        <div className="lg:col-span-2 bg-[#111827] border border-slate-850 rounded-2xl p-5 shadow-xl space-y-6">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-850">
-            <h2 className="text-sm font-bold text-slate-200 uppercase tracking-wider">Safety Analytics & Compliance Trends</h2>
-            <span className="text-xs text-slate-400 font-semibold">Active Metrics</span>
+        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow space-y-6">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+            <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider">Safety Analytics & Compliance Trends</h2>
+            <span className="text-xs text-slate-500 font-semibold">Active Metrics</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Chart 1: PPE Compliance over Time */}
-            <div className="bg-slate-950/40 border border-slate-850 rounded-xl p-4">
-              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">PPE Compliance Rate (%)</h3>
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">PPE Compliance Rate (%)</h3>
               <div className="h-44">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={ANALYTICS_DATA.complianceOverTime}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                    <XAxis dataKey="date" stroke="#94a3b8" fontSize={10} />
-                    <YAxis stroke="#94a3b8" domain={[90, 100]} fontSize={10} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <XAxis dataKey="date" stroke="#64748b" fontSize={10} />
+                    <YAxis stroke="#64748b" domain={[90, 100]} fontSize={10} />
                     <ChartTooltip 
-                      contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b' }} 
-                      labelStyle={{ color: '#f1f5f9' }} 
+                      contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px' }} 
+                      labelStyle={{ color: '#0f172a', fontWeight: 'bold' }} 
                     />
-                    <Line type="monotone" dataKey="compliance" stroke="#3b82f6" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                    <Line type="monotone" dataKey="compliance" stroke="#2563eb" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             {/* Chart 2: Violations per Zone */}
-            <div className="bg-slate-950/40 border border-slate-850 rounded-xl p-4">
-              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Violations per Zone (Last 30 Days)</h3>
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Violations per Zone (Last 30 Days)</h3>
               <div className="h-44">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={ANALYTICS_DATA.violationsByZone}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                    <XAxis dataKey="zone" stroke="#94a3b8" fontSize={10} />
-                    <YAxis stroke="#94a3b8" fontSize={10} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <XAxis dataKey="zone" stroke="#64748b" fontSize={10} />
+                    <YAxis stroke="#64748b" fontSize={10} />
                     <ChartTooltip 
-                      contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b' }}
+                      contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px' }}
                     />
-                    <Bar dataKey="count" fill="#ef4444" radius={[4, 4, 0, 0]}>
+                    <Bar dataKey="count" fill="#dc2626" radius={[4, 4, 0, 0]}>
                       {ANALYTICS_DATA.violationsByZone.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.zone === 'Welding' ? '#ef4444' : '#f59e0b'} />
+                        <Cell key={`cell-${index}`} fill={entry.zone === 'Welding' ? '#dc2626' : '#f59e0b'} />
                       ))}
                     </Bar>
                   </BarChart>
@@ -349,8 +349,8 @@ export default function Dashboard() {
             </div>
 
             {/* Chart 3: Violation Types */}
-            <div className="bg-slate-950/40 border border-slate-850 rounded-xl p-4">
-              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Infraction Types</h3>
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Infraction Types</h3>
               <div className="h-44 flex items-center justify-between">
                 <div className="w-1/2 h-full">
                   <ResponsiveContainer width="100%" height="100%">
@@ -365,7 +365,7 @@ export default function Dashboard() {
                         dataKey="value"
                       >
                         {ANALYTICS_DATA.violationTypes.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
+                          <Cell key={`cell-${index}`} fill={entry.color === '#ef4444' ? '#dc2626' : entry.color} />
                         ))}
                       </Pie>
                     </PieChart>
@@ -374,9 +374,9 @@ export default function Dashboard() {
                 <div className="w-1/2 space-y-1.5">
                   {ANALYTICS_DATA.violationTypes.map((entry, index) => (
                     <div key={index} className="flex items-center gap-2 text-[10px]">
-                      <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: entry.color }}></span>
-                      <span className="text-slate-400 truncate w-24">{entry.name}</span>
-                      <span className="font-mono text-slate-200 font-bold ml-auto">{entry.value}</span>
+                      <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: entry.color === '#ef4444' ? '#dc2626' : entry.color }}></span>
+                      <span className="text-slate-500 truncate w-24">{entry.name}</span>
+                      <span className="font-mono text-slate-800 font-bold ml-auto">{entry.value}</span>
                     </div>
                   ))}
                 </div>
@@ -384,8 +384,8 @@ export default function Dashboard() {
             </div>
 
             {/* Chart 4: Risk Zones Heat Matrix */}
-            <div className="bg-slate-950/40 border border-slate-850 rounded-xl p-4">
-              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Facility Risk Heat Map</h3>
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Facility Risk Heat Map</h3>
               <div className="grid grid-cols-5 gap-1.5 h-44 items-center">
                 {/* Visual heat grid representing high/medium/low alerts across production bays */}
                 {['Bay 1', 'Bay 2', 'Bay 3', 'Bay 4', 'Bay 5'].map((bay, colIdx) => (
@@ -393,13 +393,13 @@ export default function Dashboard() {
                     <span className="text-[8px] text-slate-500 text-center font-bold">{bay}</span>
                     {[0, 1, 2].map((rowVal, rowIdx) => {
                       // Generate mock colors based on simulated risks
-                      let cellColor = 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400';
+                      let cellColor = 'bg-emerald-50 border-emerald-200 text-emerald-700';
                       let scoreText = 'Safe';
                       if ((colIdx === 2 && rowIdx === 1) || (colIdx === 1 && rowIdx === 2)) {
-                        cellColor = 'bg-amber-500/10 border-amber-500/30 text-amber-400';
+                        cellColor = 'bg-amber-50 border-amber-200 text-amber-700';
                         scoreText = 'Warn';
                       } else if (colIdx === 2 && rowIdx === 0) {
-                        cellColor = 'bg-red-500/20 border-red-500/30 text-red-400';
+                        cellColor = 'bg-red-50 border-red-200 text-red-700';
                         scoreText = 'Crit';
                       }
                       return (
@@ -418,49 +418,49 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Alerts Panel */}
-        <div className="bg-[#111827] border border-slate-850 rounded-2xl p-5 shadow-xl flex flex-col justify-between">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-850">
-              <h2 className="text-sm font-bold text-slate-200 uppercase tracking-wider">Live EHS Alert Logs</h2>
-              <span className="text-[10px] text-red-400 bg-red-400/10 px-2 py-0.5 rounded font-mono font-bold">24h Log</span>
+            <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+              <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider">Live EHS Alert Logs</h2>
+              <span className="text-[10px] text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded font-mono font-bold">24h Log</span>
             </div>
             
             <div className="space-y-3.5 max-h-[460px] overflow-y-auto pr-1">
               {ALERTS.map((alert) => {
-                let badgeClass = 'text-emerald-400 bg-emerald-400/10 border-emerald-500/20';
-                if (alert.severity === 'Warning') badgeClass = 'text-amber-400 bg-amber-400/10 border-amber-500/20';
-                if (alert.severity === 'Critical') badgeClass = 'text-red-400 bg-red-400/10 border-red-500/20';
+                let badgeClass = 'text-emerald-700 bg-emerald-50 border border-emerald-200';
+                if (alert.severity === 'Warning') badgeClass = 'text-amber-700 bg-amber-50 border border-amber-200';
+                if (alert.severity === 'Critical') badgeClass = 'text-red-700 bg-red-50 border border-red-200';
 
                 return (
-                  <div key={alert.id} className="p-3.5 bg-slate-950/60 border border-slate-850 rounded-xl hover:border-slate-800 transition-all flex flex-col gap-2">
+                  <div key={alert.id} className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl hover:border-slate-350 transition-all flex flex-col gap-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${badgeClass}`}>
                           {alert.severity}
                         </span>
-                        <span className="text-xs font-mono font-bold text-slate-200">{alert.id}</span>
+                        <span className="text-xs font-mono font-bold text-slate-800">{alert.id}</span>
                       </div>
-                      <span className="text-[10px] text-slate-500 font-mono flex items-center gap-1">
+                      <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1">
                         <Clock className="h-3 w-3" /> {alert.timeAgo}
                       </span>
                     </div>
 
-                    <h4 className="text-xs font-semibold text-slate-200">{alert.type}</h4>
+                    <h4 className="text-xs font-semibold text-slate-800">{alert.type}</h4>
 
-                    <div className="grid grid-cols-2 gap-2 text-[10px] text-slate-400 pt-1 border-t border-slate-900">
+                    <div className="grid grid-cols-2 gap-2 text-[10px] text-slate-500 pt-1 border-t border-slate-200">
                       <div>
-                        <span className="text-slate-500 font-bold block uppercase tracking-wider">Camera</span>
-                        <span className="font-mono text-slate-300 truncate block">{alert.camera}</span>
+                        <span className="text-slate-400 font-bold block uppercase tracking-wider">Camera</span>
+                        <span className="font-mono text-slate-700 truncate block">{alert.camera}</span>
                       </div>
                       <div>
-                        <span className="text-slate-500 font-bold block uppercase tracking-wider">Worker ID</span>
-                        <span className="font-mono text-slate-300 block">{alert.workerId} ({alert.workerName})</span>
+                        <span className="text-slate-400 font-bold block uppercase tracking-wider">Worker ID</span>
+                        <span className="font-mono text-slate-700 block">{alert.workerId} ({alert.workerName})</span>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-900 text-[10px]">
-                      <span className="text-slate-500">Duration: <strong className="font-mono text-slate-300">{alert.duration}</strong></span>
-                      <span className={`font-semibold ${alert.status === 'Pending' ? 'text-amber-400' : alert.status === 'Acknowledged' ? 'text-blue-400' : 'text-emerald-400'}`}>
+                    <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-200 text-[10px]">
+                      <span className="text-slate-400">Duration: <strong className="font-mono text-slate-700">{alert.duration}</strong></span>
+                      <span className={`font-semibold ${alert.status === 'Pending' ? 'text-amber-600' : alert.status === 'Acknowledged' ? 'text-blue-600' : 'text-emerald-600'}`}>
                         {alert.status}
                       </span>
                     </div>
@@ -470,7 +470,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <button className="w-full mt-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-xs font-bold text-blue-400 hover:bg-slate-850 hover:text-blue-300 transition-all flex items-center justify-center gap-2">
+          <button className="w-full mt-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-blue-600 hover:bg-slate-50 hover:text-blue-700 transition-all flex items-center justify-center gap-2 shadow-sm">
             View All Incident Logs
             <ExternalLink className="h-3.5 w-3.5" />
           </button>

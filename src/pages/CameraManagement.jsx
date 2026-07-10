@@ -24,14 +24,14 @@ export default function CameraManagement() {
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white font-sans">Camera Device Management</h1>
-          <p className="text-sm text-slate-400">Configure computer vision parameters, frame rates, and edge network parameters.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-800 font-sans">Camera Device Management</h1>
+          <p className="text-sm text-slate-500 font-light">Configure computer vision parameters, frame rates, and edge network parameters.</p>
         </div>
         
         {/* Add Camera button */}
         <button
           onClick={() => alert('Register new edge device wizard started...')}
-          className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition-all shadow-[0_4px_12px_rgba(59,130,246,0.2)]"
+          className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
         >
           <Plus className="h-4 w-4" />
           Add AI Camera
@@ -42,18 +42,18 @@ export default function CameraManagement() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cameras.map((cam) => {
           const isActive = cam.status === 'Active';
-          let statusBadgeClass = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
-          if (!isActive) statusBadgeClass = 'text-red-400 bg-red-500/10 border-red-500/20';
+          let statusBadgeClass = 'text-emerald-700 bg-emerald-50 border border-emerald-200';
+          if (!isActive) statusBadgeClass = 'text-red-700 bg-red-50 border border-red-200';
 
           return (
-            <div key={cam.id} className="bg-[#111827] border border-slate-850 rounded-2xl p-5 shadow-xl hover:border-slate-800 transition-all flex flex-col justify-between">
+            <div key={cam.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:border-slate-300 hover:shadow-md transition-all flex flex-col justify-between animate-fade-in">
               
               <div className="space-y-4">
                 {/* Header */}
-                <div className="flex items-center justify-between pb-2.5 border-b border-slate-850">
+                <div className="flex items-center justify-between pb-2.5 border-b border-slate-200">
                   <div className="flex items-center gap-2">
-                    <Camera className={`h-4.5 w-4.5 ${isActive ? 'text-blue-400' : 'text-slate-500'}`} />
-                    <h3 className="text-xs font-bold text-slate-200">{cam.name}</h3>
+                    <Camera className={`h-4.5 w-4.5 ${isActive ? 'text-blue-600' : 'text-slate-400'}`} />
+                    <h3 className="text-xs font-bold text-slate-800">{cam.name}</h3>
                   </div>
                   <span className={`text-[9px] font-bold px-2 py-0.5 rounded border ${statusBadgeClass}`}>
                     {cam.status}
@@ -62,36 +62,36 @@ export default function CameraManagement() {
 
                 {/* Details list */}
                 <div className="space-y-2 text-xs">
-                  <div className="flex justify-between border-b border-slate-900 pb-1">
-                    <span className="text-slate-450">Location / Zone:</span>
-                    <span className="font-semibold text-slate-205">{cam.location}</span>
+                  <div className="flex justify-between border-b border-slate-100 pb-1">
+                    <span className="text-slate-400">Location / Zone:</span>
+                    <span className="font-semibold text-slate-800">{cam.location}</span>
                   </div>
-                  <div className="flex justify-between border-b border-slate-900 pb-1">
-                    <span className="text-slate-450">Resolution:</span>
-                    <span className="font-mono text-slate-205">{isActive ? cam.resolution : 'N/A'}</span>
+                  <div className="flex justify-between border-b border-slate-100 pb-1">
+                    <span className="text-slate-400">Resolution:</span>
+                    <span className="font-mono text-slate-800">{isActive ? cam.resolution : 'N/A'}</span>
                   </div>
-                  <div className="flex justify-between border-b border-slate-900 pb-1">
-                    <span className="text-slate-450">Target FPS:</span>
-                    <span className="font-mono text-slate-205">{isActive ? `${cam.fps} FPS` : '0 FPS'}</span>
+                  <div className="flex justify-between border-b border-slate-100 pb-1">
+                    <span className="text-slate-400">Target FPS:</span>
+                    <span className="font-mono text-slate-800">{isActive ? `${cam.fps} FPS` : '0 FPS'}</span>
                   </div>
-                  <div className="flex justify-between border-b border-slate-900 pb-1">
-                    <span className="text-slate-450">Last Active:</span>
-                    <span className="font-mono text-slate-205">{cam.lastActive}</span>
+                  <div className="flex justify-between border-b border-slate-100 pb-1">
+                    <span className="text-slate-400">Last Active:</span>
+                    <span className="font-mono text-slate-800">{cam.lastActive}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-450">Connection Health:</span>
+                    <span className="text-slate-400">Connection Health:</span>
                     <span className={`font-semibold ${
-                      cam.connectionStatus === 'Excellent' ? 'text-emerald-400' : cam.connectionStatus === 'Good' ? 'text-blue-400' : 'text-red-400'
+                      cam.connectionStatus === 'Excellent' ? 'text-emerald-600' : cam.connectionStatus === 'Good' ? 'text-blue-600' : 'text-red-600'
                     }`}>{cam.connectionStatus}</span>
                   </div>
                 </div>
               </div>
 
               {/* Actions footer */}
-              <div className="mt-5 pt-3.5 border-t border-slate-850/80 flex items-center justify-between gap-2">
+              <div className="mt-5 pt-3.5 border-t border-slate-200 flex items-center justify-between gap-2">
                 <button
                   onClick={() => handleRestart(cam.id)}
-                  className="flex items-center justify-center gap-1.5 px-2 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-350 hover:text-white border border-slate-800 rounded-lg text-[10px] font-semibold transition-colors flex-1"
+                  className="flex items-center justify-center gap-1.5 px-2 py-1.5 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 border border-slate-200 rounded-lg text-[10px] font-semibold transition-colors flex-1 shadow-sm"
                   title="Reboot camera node"
                 >
                   <RefreshCw className="h-3 w-3" />
@@ -99,7 +99,7 @@ export default function CameraManagement() {
                 </button>
                 <button
                   onClick={() => handleEdit(cam.id)}
-                  className="flex items-center justify-center gap-1.5 px-2 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-350 hover:text-white border border-slate-800 rounded-lg text-[10px] font-semibold transition-colors flex-1"
+                  className="flex items-center justify-center gap-1.5 px-2 py-1.5 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 border border-slate-200 rounded-lg text-[10px] font-semibold transition-colors flex-1 shadow-sm"
                   title="Configure camera settings"
                 >
                   <Sliders className="h-3 w-3" />
@@ -107,7 +107,7 @@ export default function CameraManagement() {
                 </button>
                 <button
                   onClick={() => handleRemove(cam.id)}
-                  className="flex items-center justify-center p-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 border border-red-500/10 rounded-lg text-[10px] transition-colors"
+                  className="flex items-center justify-center p-1.5 bg-red-50 hover:bg-red-100 text-red-650 hover:text-red-750 border border-red-200 rounded-lg text-[10px] transition-colors shadow-sm"
                   title="Decommission camera"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
